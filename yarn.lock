@@ -7976,9 +7976,9 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"react-native-render-html@workspace:.":
+"react-native-classic-render-html@workspace:.":
   version: 0.0.0-use.local
-  resolution: "react-native-render-html@workspace:."
+  resolution: "react-native-classic-render-html@workspace:."
   dependencies:
     "@babel/cli": ^7.12.8
     "@babel/core": ^7.12.9
