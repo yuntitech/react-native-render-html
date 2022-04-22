@@ -210,7 +210,7 @@ export function textwrapper(
   { key, ...passProps }
 ) {
   return (
-    <Text {...getTextProps(passProps)} key={key} style={convertedCSSStyles}>
+    <Text {...getTextProps(passProps)} key={key} style={convertedCSSStyles} onLongPress={undefined}>
       {children}
     </Text>
   );
