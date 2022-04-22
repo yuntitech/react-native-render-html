@@ -660,6 +660,8 @@ export default class HTML extends PureComponent {
 
           const classStyles = getElementClassStyles(attribs, classesStyles);
           const ref = React.createRef();
+          const pattern = new RegExp("[A-Za-z']+");
+          const isEnglishWord = data && typeof(data) === 'string' && pattern.test(data);
           const textElement = data ? (
             <Text
               ref={ref}
@@ -674,7 +676,7 @@ export default class HTML extends PureComponent {
                 allowedStyles,
               })}
               {...renderersProps}
-              onLongPress={defaultTextProps?.onLongPress ? () => {
+              onLongPress={isEnglishWord && defaultTextProps?.onLongPress ? () => {
                 defaultTextProps?.onLongPress({ref, data});
               } : undefined}
             >
