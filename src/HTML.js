@@ -659,8 +659,10 @@ export default class HTML extends PureComponent {
           }
 
           const classStyles = getElementClassStyles(attribs, classesStyles);
+          const ref = React.createRef();
           const textElement = data ? (
             <Text
+              ref={ref}
               style={computeTextStyles(element, {
                 defaultTextStyles: this.defaultTextStyles,
                 tagsStyles,
@@ -672,6 +674,9 @@ export default class HTML extends PureComponent {
                 allowedStyles,
               })}
               {...renderersProps}
+              onLongPress={defaultTextProps?.onLongPress ? () => {
+                defaultTextProps?.onLongPress({ref, data});
+              } : undefined}
             >
               {data}
             </Text>
@@ -691,7 +696,7 @@ export default class HTML extends PureComponent {
           ].filter((s) => s !== undefined);
 
           return (
-            <Wrapper key={key} style={style} {...renderersProps}>
+            <Wrapper key={key} style={style} {...renderersProps} onLongPress={undefined}>
               {textElement}
               {childElements}
             </Wrapper>
