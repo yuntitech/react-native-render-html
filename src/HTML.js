@@ -418,7 +418,7 @@ export default class HTML extends PureComponent {
       if (type === "text") {
         if ((!strippedData || !strippedData.length) && !allowWhitespaceNodes) {
           // This is blank, don't render an useless additional component
-          return false;
+          // return false;
         }
 
         if (
