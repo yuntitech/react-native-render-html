@@ -50,6 +50,7 @@ function sourceHasChange(oldProps, newProps) {
 
 export default class HTML extends PureComponent {
   static propTypes = {
+    isHiddenWords: PropTypes.bool,
     allowWhitespaceNodes: PropTypes.bool,
     renderers: PropTypes.object.isRequired,
     ignoredTags: PropTypes.array.isRequired,
@@ -131,6 +132,7 @@ export default class HTML extends PureComponent {
     baseFontStyle: { fontSize: 14 },
     tagsStyles: {},
     classesStyles: {},
+    isHiddenWords: false,
 
     onLinkPress: (_e, href) =>
       Linking.canOpenURL(href) && Linking.openURL(href),
@@ -662,10 +664,15 @@ export default class HTML extends PureComponent {
           const ref = React.createRef();
           const pattern = new RegExp("[A-Za-z']+");
           const isEnglishWord = data && typeof(data) === 'string' && pattern.test(data);
+          const {isHiddenWords} = this.props;
+          const hiddenStyle = {
+            color: '#F1F1F3',
+            backgroundColor: '#F1F1F3',
+          }
           const textElement = data ? (
             <Text
               ref={ref}
-              style={computeTextStyles(element, {
+              style={[computeTextStyles(element, {
                 defaultTextStyles: this.defaultTextStyles,
                 tagsStyles,
                 classesStyles,
@@ -674,7 +681,7 @@ export default class HTML extends PureComponent {
                 ptSize,
                 ignoredStyles,
                 allowedStyles,
-              })}
+              }), isHiddenWords && isEnglishWord  ? hiddenStyle : undefined]}
               {...renderersProps}
               onLongPress={isEnglishWord && defaultTextProps?.onLongPress ? () => {
                 defaultTextProps?.onLongPress({ref, data});

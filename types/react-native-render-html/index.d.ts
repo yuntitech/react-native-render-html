@@ -315,6 +315,10 @@ export interface ContainerProps<P = {}> {
    * Allows the rendering of nodes that consist of only whitespace characters
    */
   allowWhitespaceNodes?: boolean;
+  /**
+   * 是否隐藏单词
+   */
+  isHiddenWords?: boolean;
 }
 
 /**
