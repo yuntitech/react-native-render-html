@@ -683,7 +683,7 @@ export default class HTML extends PureComponent {
                 allowedStyles,
               }), isHiddenWords && isEnglishWord  ? hiddenStyle : undefined]}
               {...renderersProps}
-              onLongPress={isEnglishWord && defaultTextProps?.onLongPress ? () => {
+              onLongPress={isEnglishWord && isHiddenWords && defaultTextProps?.onLongPress ? () => {
                 defaultTextProps?.onLongPress({ref, data});
               } : undefined}
             >
