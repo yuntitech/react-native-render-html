@@ -52,6 +52,7 @@ export function a(htmlAttribs, children, convertedCSSStyles, passProps) {
       <Text
         testID="a-renderer"
         {...textProps}
+        disable={true}
         style={style}
         onPress={onPress}
         key={key}
