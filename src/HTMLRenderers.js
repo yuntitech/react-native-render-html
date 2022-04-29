@@ -52,7 +52,6 @@ export function a(htmlAttribs, children, convertedCSSStyles, passProps) {
       <Text
         testID="a-renderer"
         {...textProps}
-        disable={true}
         style={style}
         onPress={onPress}
         key={key}
@@ -211,7 +210,7 @@ export function textwrapper(
   { key, ...passProps }
 ) {
   return (
-    <Text {...getTextProps(passProps)} key={key} style={convertedCSSStyles} onLongPress={undefined}>
+    <Text {...getTextProps(passProps)} key={key} style={convertedCSSStyles} onLongPress={undefined} onPress={undefined}>
       {children}
     </Text>
   );

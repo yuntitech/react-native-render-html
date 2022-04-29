@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   Dimensions,
   Linking,
+  Pressable,
 } from "react-native";
 import {
   cssStringToRNStyle,
@@ -670,6 +671,13 @@ export default class HTML extends PureComponent {
             backgroundColor: '#F1F1F3',
           }
           const textElement = data ? (
+            <Pressable 
+              onLongPress={isEnglishWord && !isHiddenWords && defaultTextProps?.onLongPress ? () => {
+                defaultTextProps?.onLongPress({ref, data});
+              } : undefined} 
+              onPress={defaultTextProps?.onPress ? () => {
+                defaultTextProps?.onPress();
+              } : undefined}>
             <Text
               ref={ref}
               style={[computeTextStyles(element, {
@@ -683,12 +691,12 @@ export default class HTML extends PureComponent {
                 allowedStyles,
               }), isHiddenWords && isEnglishWord  ? hiddenStyle : undefined]}
               {...renderersProps}
-              onLongPress={isEnglishWord && !isHiddenWords && defaultTextProps?.onLongPress ? () => {
-                defaultTextProps?.onLongPress({ref, data});
-              } : undefined}
+              onPress={undefined}
+              onLongPress={undefined}
             >
               {data}
             </Text>
+            </Pressable>
           ) : (
             false
           );
@@ -705,7 +713,7 @@ export default class HTML extends PureComponent {
           ].filter((s) => s !== undefined);
 
           return (
-            <Wrapper key={key} style={style} {...renderersProps} onLongPress={undefined}>
+            <Wrapper key={key} style={style} {...renderersProps} onLongPress={undefined} onPress={undefined}>
               {textElement}
               {childElements}
             </Wrapper>
