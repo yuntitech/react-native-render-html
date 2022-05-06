@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
   Dimensions,
   Linking,
-  Pressable,
+  TouchableWithoutFeedback,  
 } from "react-native";
 import {
   cssStringToRNStyle,
