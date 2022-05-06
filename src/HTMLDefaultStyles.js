@@ -50,10 +50,11 @@ export function generateDefaultTextStyles(baseFontSize = BASE_FONT_SIZE) {
     sup: {
       fontSize: baseFontSize * 0.8,
     },
-    p: {
-      marginTop: baseFontSize,
-      marginBottom: baseFontSize,
-    },
+    // 解决父组件包裹文字间距异常问题，如有其他地方显示异常，可在TextTagStyle中加上margin问题
+    // p: {
+    //   marginTop: baseFontSize,
+    //   marginBottom: baseFontSize,
+    // },
   };
 }
 
