@@ -670,8 +670,10 @@ export default class HTML extends PureComponent {
             color: '#F1F1F3',
             backgroundColor: '#F1F1F3',
           }
+          const isCanPress = (defaultTextProps?.onLongPress || defaultTextProps?.onPress) ? false : true
           const textElement = data ? (
             <Pressable 
+              disabled={isCanPress}
               onLongPress={isEnglishWord && !isHiddenWords && defaultTextProps?.onLongPress ? () => {
                 defaultTextProps?.onLongPress({ref, data});
               } : undefined} 
