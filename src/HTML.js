@@ -671,7 +671,7 @@ export default class HTML extends PureComponent {
             backgroundColor: '#F1F1F3',
           }
           const textElement = data ? (
-            <Pressable 
+            <TouchableWithoutFeedback 
               onLongPress={isEnglishWord && !isHiddenWords && defaultTextProps?.onLongPress ? () => {
                 defaultTextProps?.onLongPress({ref, data});
               } : undefined} 
@@ -696,7 +696,7 @@ export default class HTML extends PureComponent {
             >
               {data}
             </Text>
-            </Pressable>
+            </TouchableWithoutFeedback>
           ) : (
             false
           );
