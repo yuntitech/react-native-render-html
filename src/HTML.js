@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { Fragment, PureComponent } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import {
   View,
@@ -671,34 +671,54 @@ export default class HTML extends PureComponent {
             backgroundColor: '#F1F1F3',
           }
           const isCanPress = (defaultTextProps?.onLongPress || defaultTextProps?.onPress) ? true : false;
-          const PressableComponent = isCanPress ? Pressable : Fragment
           const textElement = data ? (
-            <PressableComponent 
+            isCanPress ? (
+              <Pressable 
               onLongPress={isEnglishWord && !isHiddenWords && defaultTextProps?.onLongPress ? () => {
                 defaultTextProps?.onLongPress({ref, data});
               } : undefined} 
               onPress={defaultTextProps?.onPress ? () => {
                 defaultTextProps?.onPress();
               } : undefined}>
-            <Text
-              ref={ref}
-              style={[computeTextStyles(element, {
-                defaultTextStyles: this.defaultTextStyles,
-                tagsStyles,
-                classesStyles,
-                baseFontStyle,
-                emSize,
-                ptSize,
-                ignoredStyles,
-                allowedStyles,
-              }), isHiddenWords && isEnglishWord  ? hiddenStyle : undefined]}
-              {...renderersProps}
-              onPress={undefined}
-              onLongPress={undefined}
-            >
-              {data}
-            </Text>
-            </PressableComponent>
+                <Text
+                  ref={ref}
+                  style={[computeTextStyles(element, {
+                    defaultTextStyles: this.defaultTextStyles,
+                    tagsStyles,
+                    classesStyles,
+                    baseFontStyle,
+                    emSize,
+                    ptSize,
+                    ignoredStyles,
+                    allowedStyles,
+                  }), isHiddenWords && isEnglishWord  ? hiddenStyle : undefined]}
+                  {...renderersProps}
+                  onPress={undefined}
+                  onLongPress={undefined}
+                >
+                  {data}
+                </Text>
+              </Pressable>
+            ): (
+              <Text
+                ref={ref}
+                style={[computeTextStyles(element, {
+                  defaultTextStyles: this.defaultTextStyles,
+                  tagsStyles,
+                  classesStyles,
+                  baseFontStyle,
+                  emSize,
+                  ptSize,
+                  ignoredStyles,
+                  allowedStyles,
+                }), isHiddenWords && isEnglishWord  ? hiddenStyle : undefined]}
+                {...renderersProps}
+                onPress={undefined}
+                onLongPress={undefined}
+              >
+                {data}
+              </Text>
+            )
           ) : (
             false
           );
