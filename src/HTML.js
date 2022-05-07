@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { PureComponent } from "react";
+import React, { Fragment, PureComponent } from "react";
 import PropTypes from "prop-types";
 import {
   View,
@@ -8,7 +8,6 @@ import {
   Dimensions,
   Linking,
   Pressable,
-  Fragment,
 } from "react-native";
 import {
   cssStringToRNStyle,
