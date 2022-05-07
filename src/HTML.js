@@ -8,6 +8,7 @@ import {
   Dimensions,
   Linking,
   Pressable,
+  Fragment,
 } from "react-native";
 import {
   cssStringToRNStyle,
@@ -670,10 +671,10 @@ export default class HTML extends PureComponent {
             color: '#F1F1F3',
             backgroundColor: '#F1F1F3',
           }
-          const isCanPress = (defaultTextProps?.onLongPress || defaultTextProps?.onPress) ? false : true
+          const isCanPress = (defaultTextProps?.onLongPress || defaultTextProps?.onPress) ? true : false;
+          const PressableComponent = isCanPress ? Pressable : Fragment
           const textElement = data ? (
-            <Pressable 
-              disabled={isCanPress}
+            <PressableComponent 
               onLongPress={isEnglishWord && !isHiddenWords && defaultTextProps?.onLongPress ? () => {
                 defaultTextProps?.onLongPress({ref, data});
               } : undefined} 
@@ -698,7 +699,7 @@ export default class HTML extends PureComponent {
             >
               {data}
             </Text>
-            </Pressable>
+            </PressableComponent>
           ) : (
             false
           );
