@@ -672,6 +672,7 @@ export default class HTML extends PureComponent {
           const hiddenStyle = {
             color: '#F1F1F3',
             backgroundColor: '#F1F1F3',
+            height: (tagsStyles.lineHeight ?? 25) - 4,
           }
           const isCanPress = (defaultTextProps?.onLongPress || defaultTextProps?.onPress) ? true : false;
         const textElement = data ? (
