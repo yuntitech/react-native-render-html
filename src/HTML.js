@@ -582,6 +582,7 @@ export default class HTML extends PureComponent {
       ptSize,
       tagsStyles,
       textSelectable,
+      contentWidth,
       defaultTextProps: { style: _textStlye, ...defaultTextProps },
     } = props;
 
@@ -665,18 +666,21 @@ export default class HTML extends PureComponent {
           const ref = React.createRef();
           const pattern = new RegExp("[A-Za-z']+");
           const isEnglishWord = data && typeof(data) === 'string' && pattern.test(data);
+          const blankPattern = new RegExp(" ");
+          const isNotBlank = data && typeof(data) === 'string' && !blankPattern.test(data);
           const {isHiddenWords} = this.props;
           const hiddenStyle = {
             color: '#F1F1F3',
             backgroundColor: '#F1F1F3',
           }
           const isCanPress = (defaultTextProps?.onLongPress || defaultTextProps?.onPress) ? true : false;
-          const textElement = data ? (
+        const textElement = data ? (
             isCanPress ? (
-              <Pressable 
+            <Pressable 
               onLongPress={isEnglishWord && !isHiddenWords && defaultTextProps?.onLongPress ? () => {
                 defaultTextProps?.onLongPress({ref, data});
               } : undefined} 
+              style={contentWidth && {maxWidth:contentWidth}}
               onPress={defaultTextProps?.onPress ? () => {
                 defaultTextProps?.onPress();
               } : undefined}>
@@ -691,7 +695,7 @@ export default class HTML extends PureComponent {
                     ptSize,
                     ignoredStyles,
                     allowedStyles,
-                  }), isHiddenWords && isEnglishWord  ? hiddenStyle : undefined]}
+                  }),isHiddenWords && isNotBlank  ? hiddenStyle : undefined]}
                   {...renderersProps}
                   onPress={undefined}
                   onLongPress={undefined}
@@ -699,7 +703,7 @@ export default class HTML extends PureComponent {
                   {data}
                 </Text>
               </Pressable>
-            ): (
+          ) : (
               <Text
                 ref={ref}
                 style={[computeTextStyles(element, {
@@ -711,7 +715,7 @@ export default class HTML extends PureComponent {
                   ptSize,
                   ignoredStyles,
                   allowedStyles,
-                }), isHiddenWords && isEnglishWord  ? hiddenStyle : undefined]}
+                }), isHiddenWords && isNotBlank  ? hiddenStyle : undefined]}
                 {...renderersProps}
                 onPress={undefined}
                 onLongPress={undefined}
