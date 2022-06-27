@@ -668,12 +668,35 @@ export default class HTML extends PureComponent {
           const isEnglishWord = data && typeof(data) === 'string' && pattern.test(data);
           const blankPattern = new RegExp(" ");
           const isNotBlank = data && typeof(data) === 'string' && !blankPattern.test(data);
-          const {isHiddenWords} = this.props;
+          const {isHiddenWords , isSelected,keyWords} = this.props;
+          let isKeyWords = false;
+
+          if(!isHiddenWords && isNotBlank && keyWords && keyWords.length > 0 && isEnglishWord ){
+            keyWords.some(keyWord=>{
+            if(data.toLocaleLowerCase().search(keyWord.toLocaleLowerCase()) !== -1){
+              isKeyWords = true;
+                  return true;
+              }else{
+                return false;
+              }
+            })   
+          }
           const hiddenStyle = {
             color: '#F1F1F3',
             backgroundColor: '#F1F1F3',
             height: (tagsStyles.lineHeight ?? 25) - 4,
           }
+          const hiddenSelectedStyle = {
+            color: '#DCE4FF',
+            backgroundColor: '#DCE4FF',
+            height: (tagsStyles.lineHeight ?? 25) - 4,
+          }
+
+          const keyWordStyle = {
+            color: '#FFAA00',
+            // height: (tagsStyles.lineHeight ?? 25) - 4,
+          }
+
           const isCanPress = (defaultTextProps?.onLongPress || defaultTextProps?.onPress) ? true : false;
         const textElement = data ? (
             isCanPress ? (
@@ -696,7 +719,7 @@ export default class HTML extends PureComponent {
                     ptSize,
                     ignoredStyles,
                     allowedStyles,
-                  }),isHiddenWords && isNotBlank  ? hiddenStyle : undefined]}
+                  }),isHiddenWords && isNotBlank  ? hiddenStyle : undefined,isSelected && isHiddenWords && isNotBlank?hiddenSelectedStyle :undefined ,isKeyWords?keyWordStyle:undefined]}
                   {...renderersProps}
                   onPress={undefined}
                   onLongPress={undefined}
