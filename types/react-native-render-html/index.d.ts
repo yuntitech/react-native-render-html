@@ -319,6 +319,14 @@ export interface ContainerProps<P = {}> {
    * 是否隐藏单词
    */
   isHiddenWords?: boolean;
+  /**
+   * 是否选中
+   */
+  isSelected?:boolean;
+  /**
+   *  重点单词
+   */
+  keyWords?:string[];
 }
 
 /**
