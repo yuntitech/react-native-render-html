@@ -8,6 +8,7 @@ import {
   Dimensions,
   Linking,
   Pressable,
+  Platform,
 } from "react-native";
 import {
   cssStringToRNStyle,
@@ -693,8 +694,23 @@ export default class HTML extends PureComponent {
           }
 
           const keyWordStyle = {
-            color: '#FFAA00',
-            // height: (tagsStyles.lineHeight ?? 25) - 4,
+            fontWeight:'bold',
+          }
+
+          const iOSkeyWordStyle = {
+            textDecorationStyle:'dotted',
+            textDecorationLine: 'underline',
+            textDecorationColor: '#FFAA00',
+            fontWeight:'bold',
+          }
+
+
+          const andtroidKeyWordStyle = {
+            borderStyle: 'dashed',
+            borderWidth: 0.7,
+            borderRadius: 0.1,
+            borderColor:'#FFAA00',
+            height:0.5,
           }
 
           const isCanPress = (defaultTextProps?.onLongPress || defaultTextProps?.onPress) ? true : false;
@@ -708,6 +724,7 @@ export default class HTML extends PureComponent {
               onPress={defaultTextProps?.onPress ? () => {
                 defaultTextProps?.onPress();
               } : undefined}>
+                <View >
                 <Text
                   ref={ref}
                   style={[computeTextStyles(element, {
@@ -719,13 +736,15 @@ export default class HTML extends PureComponent {
                     ptSize,
                     ignoredStyles,
                     allowedStyles,
-                  }),isHiddenWords && isNotBlank  ? hiddenStyle : undefined,isSelected && isHiddenWords && isNotBlank?hiddenSelectedStyle :undefined ,isKeyWords?keyWordStyle:undefined]}
+                  }),isHiddenWords && isNotBlank  ? hiddenStyle : undefined,isSelected && isHiddenWords && isNotBlank?hiddenSelectedStyle :undefined ,(isKeyWords && Platform.OS === 'ios')?iOSkeyWordStyle:undefined,isKeyWords?keyWordStyle:undefined]}
                   {...renderersProps}
                   onPress={undefined}
                   onLongPress={undefined}
                 >
                   {data}
                 </Text>
+                <View style={(isNotBlank&&isKeyWords && Platform.OS === 'android') ?  andtroidKeyWordStyle:undefined}></View>
+                </View>
               </Pressable>
           ) : (
               <Text
